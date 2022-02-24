@@ -6,7 +6,7 @@ let idrCurrency = Intl.NumberFormat('id-ID', {
 });
 
 const getInfoPenjualan = (dataPenjualan) => {
-  dataPenjualan = dataPenjualanNovel;
+  dataPenjualan = dataPenjualanNovel; // tidak berguna
 
   if (typeof dataPenjualan === 'object') {
     let totalModal = 0,
@@ -53,7 +53,7 @@ const getInfoPenjualan = (dataPenjualan) => {
         return dataPenjualan.penulis;
       });
 
-      resultProdukTerlaris = tempProdukTerlaris.join();
+      resultProdukTerlaris = tempProdukTerlaris.join(); // bisa diganti jadi index ke-0
       resultPenulisTerlaris = tempPenulisTerlaris.join();
     }
     return (hasilAkhir = {

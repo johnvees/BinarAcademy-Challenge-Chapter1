@@ -65,5 +65,6 @@ console.log(getSplitName('Aurora Areliya Sukma Darma'));
 // Error : This function is only for 3 word name
 
 console.log(getSplitName(0));
+console.log(getSplitName(1));
 // EXPECTED OUTPUT
 // Error : 0 bukanlah sebuah string
