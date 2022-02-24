@@ -4,5 +4,7 @@ example:
 namaFunction("456") => 456
 namaFunction("4sq1") => "Error : params is not valid"
 
+
+
 rules:
 tidak boleh pakai parseInt/parse lainnya
