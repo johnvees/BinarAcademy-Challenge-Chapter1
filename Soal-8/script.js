@@ -8,60 +8,64 @@ let idrCurrency = Intl.NumberFormat('id-ID', {
 const getInfoPenjualan = (dataPenjualan) => {
   dataPenjualan = dataPenjualanNovel;
 
-  let totalModal = 0,
-    totalKeuntungan = 0,
-    persentaseKeuntungan = 0,
-    theMostSold = 0,
-    filterFromSold = 0,
-    tempProdukTerlaris = 0,
-    tempPenulisTerlaris = 0,
-    resultProdukTerlaris = 0,
-    resultPenulisTerlaris = 0;
+  if (typeof dataPenjualan === 'object') {
+    let totalModal = 0,
+      totalKeuntungan = 0,
+      persentaseKeuntungan = 0,
+      theMostSold = 0,
+      filterFromSold = 0,
+      tempProdukTerlaris = 0,
+      tempPenulisTerlaris = 0,
+      resultProdukTerlaris = 0,
+      resultPenulisTerlaris = 0;
 
-  for (let i = 0; i < dataPenjualan.length; i++) {
-    totalModal +=
-      dataPenjualan[i].hargaBeli *
-      (dataPenjualan[i].totalTerjual + dataPenjualan[i].sisaStok);
-    // console.log(totalModal);
-
-    totalKeuntungan +=
-      dataPenjualan[i].hargaJual * dataPenjualan[i].totalTerjual -
-      dataPenjualan[i].hargaBeli *
+    for (let i = 0; i < dataPenjualan.length; i++) {
+      totalModal +=
+        dataPenjualan[i].hargaBeli *
         (dataPenjualan[i].totalTerjual + dataPenjualan[i].sisaStok);
-    // console.log(totalKeuntungan);
+      // console.log(totalModal);
 
-    persentaseKeuntungan = (totalKeuntungan / totalModal) * 100;
-    // console.log(persentaseKeuntungan);
+      totalKeuntungan +=
+        dataPenjualan[i].hargaJual * dataPenjualan[i].totalTerjual -
+        dataPenjualan[i].hargaBeli *
+          (dataPenjualan[i].totalTerjual + dataPenjualan[i].sisaStok);
+      // console.log(totalKeuntungan);
 
-    theMostSold = Math.max.apply(
-      Math,
-      dataPenjualan.map(function (dataPenjualan) {
-        return dataPenjualan.totalTerjual;
-      })
-    );
+      persentaseKeuntungan = (totalKeuntungan / totalModal) * 100;
+      // console.log(persentaseKeuntungan);
 
-    filterFromSold = dataPenjualan.filter((dataPenjualan) => {
-      return dataPenjualan.totalTerjual === theMostSold;
+      theMostSold = Math.max.apply(
+        Math,
+        dataPenjualan.map(function (dataPenjualan) {
+          return dataPenjualan.totalTerjual;
+        })
+      );
+
+      filterFromSold = dataPenjualan.filter((dataPenjualan) => {
+        return dataPenjualan.totalTerjual === theMostSold;
+      });
+
+      tempProdukTerlaris = filterFromSold.map(function (dataPenjualan) {
+        return dataPenjualan.namaProduk;
+      });
+
+      tempPenulisTerlaris = filterFromSold.map(function (dataPenjualan) {
+        return dataPenjualan.penulis;
+      });
+
+      resultProdukTerlaris = tempProdukTerlaris.join();
+      resultPenulisTerlaris = tempPenulisTerlaris.join();
+    }
+    return (hasilAkhir = {
+      totalKeuntungan: idrCurrency.format(totalKeuntungan),
+      totalModal: idrCurrency.format(totalModal),
+      persentaseKeuntungan: persentaseKeuntungan.toFixed(2) + '%',
+      produkBukuTerlaris: resultProdukTerlaris,
+      penulisTerlaris: resultPenulisTerlaris,
     });
-
-    tempProdukTerlaris = filterFromSold.map(function (dataPenjualan) {
-      return dataPenjualan.namaProduk;
-    });
-
-    tempPenulisTerlaris = filterFromSold.map(function (dataPenjualan) {
-      return dataPenjualan.penulis;
-    });
-
-    resultProdukTerlaris = tempProdukTerlaris.join();
-    resultPenulisTerlaris = tempPenulisTerlaris.join();
+  } else {
+    return 'ERROR';
   }
-  return (hasilAkhir = {
-    totalKeuntungan: idrCurrency.format(totalKeuntungan),
-    totalModal: idrCurrency.format(totalModal),
-    persentaseKeuntungan: persentaseKeuntungan.toFixed(2) + '%',
-    produkBukuTerlaris: resultProdukTerlaris,
-    penulisTerlaris: resultPenulisTerlaris,
-  });
 };
 
 const dataPenjualanNovel = [

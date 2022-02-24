@@ -2,12 +2,17 @@ console.log('Chapter 1 Challenge Number 7');
 
 const getTotalPenjualan = (dataPenjualan) => {
   dataPenjualan = dataPenjualanPakAldi;
-  let sum = 0;
-  for (let i = 0; i < dataPenjualan.length; i++) {
-    sum += dataPenjualan[i].totalTerjual;
-    console.log(sum);
+
+  if (typeof dataPenjualan === 'object') {
+    let sum = 0;
+    for (let i = 0; i < dataPenjualan.length; i++) {
+      sum += dataPenjualan[i].totalTerjual;
+      // console.log(sum);
+    }
+    return sum;
+  } else {
+    return 'ERROR';
   }
-  return sum;
 };
 
 const dataPenjualanPakAldi = [
