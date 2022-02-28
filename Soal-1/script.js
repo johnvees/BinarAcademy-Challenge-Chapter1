@@ -20,7 +20,7 @@ const changeWord = (selectedText, changedText, text) => {
   if (text === kalimat1) {
     const result = kalimat1.replace('mencintai', 'membenci');
     return result;
-  } else if(text === kalimat2) {
+  } else if (text === kalimat2) {
     const result = kalimat2.replace('bromo', 'semeru');
     return result;
   }
